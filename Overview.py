@@ -15,15 +15,16 @@ price_min = df_top100_books["book price"].min() # procura e retorna o menor valo
 # Slider de Preços - Cria um slider capaz de ir do preço mínimo dos livros até o preço máximo.
 max_price = st.sidebar.slider("Price Range", price_min, price_max, price_max)
 
-
+# Define que a seção de preços de livros será a seção afetada pelo slider de preços.
 df_books = df_top100_books[df_top100_books["book price"] <= max_price]
+# Exibe o dataset.
 df_books
 
-# Gráficos - Cria os gráficos em barras com pandas.
+# Gráficos - Cria os gráficos em barras e em forma de histograma com pandas.
 fig = px.bar(df_books["year of publication"].value_counts())
 fig2 = px.histogram(df_books["book price"])
 
-# Divide os gráfico em duas colunas na tela, ao invés de um ficar embaixo do outro.
+# Divide os gráfics em duas colunas na tela, ao invés de um ficar embaixo do outro.
 col1, col2 = st.columns(2)
 col1.plotly_chart(fig)
 col2.plotly_chart(fig2)
